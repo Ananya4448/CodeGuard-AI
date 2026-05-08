@@ -2,7 +2,7 @@
 
 An intelligent, automated code review system powered by LangGraph multi-agent architecture for bug detection, security analysis, and intelligent refactoring.
 
-## 🚀 Features
+##  Features
 
 - **Multi-Agent Architecture**: Specialized agents for different code review aspects using LangGraph
 - **Comprehensive Analysis**:
@@ -16,7 +16,7 @@ An intelligent, automated code review system powered by LangGraph multi-agent ar
 - **RESTful API**: Scalable backend service for integration
 - **Structured Reports**: Detailed review reports with quality scoring
 
-## 📋 Architecture
+##  Architecture
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -51,7 +51,7 @@ An intelligent, automated code review system powered by LangGraph multi-agent ar
                 └──────────────────┘
 ```
 
-## 🛠️ Installation
+##  Installation
 
 ### Prerequisites
 
@@ -76,7 +76,7 @@ cp .env.example .env
 # Edit .env with your API keys
 ```
 
-## 📖 Usage
+##  Usage
 
 ### Command Line Interface
 
@@ -150,7 +150,7 @@ print(f"Issues Found: {len(result.issues)}")
 print(f"Refactoring Suggestions: {len(result.refactorings)}")
 ```
 
-## 📊 Evaluation Metrics
+##  Evaluation Metrics
 
 The system tracks:
 
@@ -160,7 +160,7 @@ The system tracks:
 - **Confusion Matrix**: True/False Positives/Negatives
 - **Hallucination Rate**: False positive detection rate
 
-## 🧪 Testing
+##  Testing
 
 ```bash
 # Run all tests
@@ -173,7 +173,7 @@ pytest --cov=src --cov-report=html
 python -m src.evaluation.benchmark
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 CodeReview-Agent/
@@ -208,15 +208,15 @@ CodeReview-Agent/
 └── README.md
 ```
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions welcome! Please read CONTRIBUTING.md for guidelines.
 
-## 📄 License
+##  License
 
 MIT License - see LICENSE file for details.
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - LangGraph for multi-agent orchestration
 - Static analysis tools: Pylint, Bandit, Flake8

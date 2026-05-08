@@ -84,6 +84,7 @@ python -m src.api.server
    - `langchain` `fastapi` `ai` `machine-learning` `automated-testing`
 
 3. **Add README Badges** (optional)
+
    ```markdown
    ![Python](https://img.shields.io/badge/python-3.9+-blue.svg)
    ![License](https://img.shields.io/badge/license-MIT-green.svg)
@@ -109,7 +110,7 @@ Add this to your GitHub profile or share with others:
 🤖 AI-powered code review system with multi-agent LLM orchestration
 
 - ✅ Security vulnerability detection
-- ✅ Bug detection & logic error analysis  
+- ✅ Bug detection & logic error analysis
 - ✅ Intelligent refactoring suggestions
 - ✅ Quality scoring (0-100)
 - ✅ Evaluation framework (Precision, Recall, F1)
