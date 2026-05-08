@@ -19,6 +19,7 @@ Check if the service is running.
 **Endpoint**: `GET /health`
 
 **Response**:
+
 ```json
 {
   "status": "healthy",
@@ -35,6 +36,7 @@ Submit code for review and wait for results.
 **Endpoint**: `POST /api/v1/review/sync`
 
 **Request Body**:
+
 ```json
 {
   "code": "def example():\n    pass",
@@ -50,6 +52,7 @@ Submit code for review and wait for results.
 ```
 
 **Parameters**:
+
 - `code` (string, required): Source code to review
 - `language` (string, required): Programming language (python, javascript, typescript, java, go)
 - `file_path` (string, optional): File path for context
@@ -60,6 +63,7 @@ Submit code for review and wait for results.
   - `calculate_metrics` (boolean): Calculate quality metrics
 
 **Response**: `200 OK`
+
 ```json
 {
   "review_id": "550e8400-e29b-41d4-a716-446655440000",
@@ -120,6 +124,7 @@ Submit code for review and wait for results.
 ```
 
 **Error Response**: `500 Internal Server Error`
+
 ```json
 {
   "detail": "Review failed: <error message>"
@@ -137,6 +142,7 @@ Submit code for review, returns immediately with review ID.
 **Request Body**: Same as synchronous endpoint
 
 **Response**: `200 OK`
+
 ```json
 {
   "review_id": "550e8400-e29b-41d4-a716-446655440000",
@@ -155,24 +161,30 @@ Retrieve review results by ID.
 **Endpoint**: `GET /api/v1/review/{review_id}`
 
 **Path Parameters**:
+
 - `review_id` (string): Review identifier
 
 **Response**: `200 OK`
+
 ```json
 {
   "review_id": "550e8400-e29b-41d4-a716-446655440000",
   "status": "completed",
-  "result": { /* ReviewResult object */ },
+  "result": {
+    /* ReviewResult object */
+  },
   "message": "Review status: completed"
 }
 ```
 
 **Status Values**:
+
 - `processing`: Review in progress
 - `completed`: Review finished successfully
 - `failed`: Review encountered an error
 
 **Error Response**: `404 Not Found`
+
 ```json
 {
   "detail": "Review not found"
@@ -188,9 +200,11 @@ Get only the status without full result.
 **Endpoint**: `GET /api/v1/review/{review_id}/status`
 
 **Path Parameters**:
+
 - `review_id` (string): Review identifier
 
 **Response**: `200 OK`
+
 ```json
 {
   "review_id": "550e8400-e29b-41d4-a716-446655440000",
@@ -208,10 +222,12 @@ List recent reviews with pagination.
 **Endpoint**: `GET /api/v1/reviews`
 
 **Query Parameters**:
+
 - `limit` (integer, optional): Number of results (default: 10)
 - `offset` (integer, optional): Offset for pagination (default: 0)
 
 **Response**: `200 OK`
+
 ```json
 {
   "total": 50,
@@ -239,6 +255,7 @@ Get aggregate metrics across all reviews.
 **Endpoint**: `GET /api/v1/metrics`
 
 **Response**: `200 OK`
+
 ```json
 {
   "total_reviews": 150,
@@ -273,9 +290,11 @@ Delete a review by ID.
 **Endpoint**: `DELETE /api/v1/review/{review_id}`
 
 **Path Parameters**:
+
 - `review_id` (string): Review identifier
 
 **Response**: `200 OK`
+
 ```json
 {
   "message": "Review 550e8400-e29b-41d4-a716-446655440000 deleted successfully"
@@ -378,18 +397,20 @@ print(f"Issues: {len(result['result']['issues'])}")
 ### JavaScript/Node.js Example
 
 ```javascript
-const axios = require('axios');
+const axios = require("axios");
 
 async function reviewCode() {
   const response = await axios.post(
-    'http://localhost:8000/api/v1/review/sync',
+    "http://localhost:8000/api/v1/review/sync",
     {
-      code: 'function divide(a, b) { return a / b; }',
-      language: 'javascript'
-    }
+      code: "function divide(a, b) { return a / b; }",
+      language: "javascript",
+    },
   );
-  
-  console.log(`Quality Score: ${response.data.result.quality_metrics.overall_score}/100`);
+
+  console.log(
+    `Quality Score: ${response.data.result.quality_metrics.overall_score}/100`,
+  );
   console.log(`Issues: ${response.data.result.issues.length}`);
 }
 
@@ -422,6 +443,7 @@ All errors return appropriate HTTP status codes:
 - `500 Internal Server Error`: Server error
 
 Error response format:
+
 ```json
 {
   "detail": "Error message"

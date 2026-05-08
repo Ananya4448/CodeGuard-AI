@@ -20,24 +20,28 @@ Thank you for your interest in contributing to CodeReview-Agent! This document p
 ### Development Setup
 
 1. **Fork and Clone**
+
    ```bash
    git clone https://github.com/your-username/CodeReview-Agent.git
    cd CodeReview-Agent
    ```
 
 2. **Create Virtual Environment**
+
    ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
 3. **Install Dependencies**
+
    ```bash
    pip install -r requirements.txt
    pip install -r requirements-dev.txt  # If available
    ```
 
 4. **Configure Environment**
+
    ```bash
    cp .env.example .env
    # Edit .env with your API keys
@@ -59,6 +63,7 @@ git checkout -b fix/bug-description
 ```
 
 Branch naming conventions:
+
 - `feature/` - New features
 - `fix/` - Bug fixes
 - `docs/` - Documentation changes
@@ -96,6 +101,7 @@ git commit -m "docs: update API documentation"
 ```
 
 Commit message format:
+
 - `feat:` - New feature
 - `fix:` - Bug fix
 - `docs:` - Documentation
@@ -111,6 +117,7 @@ git push origin feature/your-feature-name
 ```
 
 Then create a Pull Request on GitHub with:
+
 - Clear description of changes
 - Link to related issues
 - Screenshots (if UI changes)
@@ -145,6 +152,7 @@ mypy src/
 - **Type hints**: Use type hints for function parameters and return values
 
 Example:
+
 ```python
 from typing import List, Optional
 
@@ -155,12 +163,12 @@ def analyze_code(
 ) -> ReviewResult:
     """
     Analyze code for issues.
-    
+
     Args:
         code: Source code to analyze
         language: Programming language
         options: Optional analysis options
-    
+
     Returns:
         ReviewResult with findings
     """
@@ -187,16 +195,16 @@ def test_security_agent_detects_sql_injection():
     """Test that security agent detects SQL injection."""
     config = Config.from_env()
     agent = SecurityAgent(config)
-    
+
     code = """
     def get_user(user_id):
         query = f"SELECT * FROM users WHERE id = {user_id}"
         return execute(query)
     """
-    
+
     state = AgentState(code=code, language="python", review_id="test")
     result = agent.analyze(state)
-    
+
     assert len(result.security_issues) > 0
     assert any("injection" in issue.title.lower() for issue in result.security_issues)
 ```
@@ -239,13 +247,14 @@ pytest -x
 6. Update documentation
 
 Example:
+
 ```python
 # src/agents/performance_agent.py
 class PerformanceAgent:
     def __init__(self, config: Config):
         self.config = config
         self.llm = create_llm(config)
-    
+
     def analyze(self, state: AgentState) -> AgentState:
         # Analyze code for performance issues
         issues = self._detect_performance_issues(state.code)
@@ -280,23 +289,28 @@ See `examples/custom_rules.py` for example.
 
 ```markdown
 ## Description
+
 Brief description of changes
 
 ## Type of Change
+
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Breaking change
 - [ ] Documentation update
 
 ## Changes Made
+
 - Change 1
 - Change 2
 
 ## Testing
+
 - Test scenario 1
 - Test scenario 2
 
 ## Related Issues
+
 Closes #123
 
 ## Screenshots (if applicable)
@@ -314,6 +328,7 @@ Closes #123
 ### Bug Reports
 
 Include:
+
 - Clear description
 - Steps to reproduce
 - Expected vs actual behavior
@@ -324,6 +339,7 @@ Include:
 ### Feature Requests
 
 Include:
+
 - Use case description
 - Proposed solution
 - Alternative solutions considered

@@ -75,6 +75,7 @@ for issue in result.issues:
 ```
 
 Run it:
+
 ```bash
 python my_review.py
 ```
@@ -82,16 +83,19 @@ python my_review.py
 ### Option 2: Command Line
 
 Review a single file:
+
 ```bash
 python -m src.cli analyze --file example.py
 ```
 
 Review a directory:
+
 ```bash
 python -m src.cli analyze --dir src/
 ```
 
 Generate JSON report:
+
 ```bash
 python -m src.cli analyze --file app.py --report json --output report.json
 ```
@@ -99,11 +103,13 @@ python -m src.cli analyze --file app.py --report json --output report.json
 ### Option 3: REST API
 
 Start the server:
+
 ```bash
 python -m src.api.server
 ```
 
 In another terminal, submit a review:
+
 ```bash
 curl -X POST http://localhost:8000/api/v1/review/sync \
   -H "Content-Type: application/json" \
@@ -148,12 +154,14 @@ python examples/batch_processing.py src/
 ## Understanding the Output
 
 ### Quality Score (0-100)
+
 - **90-100**: Excellent code quality
 - **75-89**: Good quality
 - **60-74**: Acceptable quality
 - **Below 60**: Needs improvement
 
 ### Issue Severity Levels
+
 - **Critical**: Must fix immediately (security vulnerabilities, critical bugs)
 - **High**: Should fix soon (potential bugs, poor practices)
 - **Medium**: Should address (code smells, maintainability issues)
@@ -198,6 +206,7 @@ MEDIUM (1):
 ### 1. Pre-Commit Hook
 
 Review code before committing:
+
 ```bash
 python -m src.cli analyze --file changed_file.py
 ```
@@ -205,6 +214,7 @@ python -m src.cli analyze --file changed_file.py
 ### 2. CI/CD Integration
 
 Add to your GitHub Actions or GitLab CI:
+
 ```yaml
 - name: Code Review
   run: |
@@ -215,6 +225,7 @@ Add to your GitHub Actions or GitLab CI:
 ### 3. Code Quality Dashboard
 
 Use the API to build a dashboard:
+
 ```python
 import requests
 
@@ -269,6 +280,7 @@ API_PORT=8000
 ## Troubleshooting
 
 ### "ModuleNotFoundError"
+
 ```bash
 # Make sure you're in the virtual environment
 source venv/bin/activate  # or venv\Scripts\activate on Windows
@@ -278,6 +290,7 @@ pip install -r requirements.txt
 ```
 
 ### "OpenAI API Key Error"
+
 ```bash
 # Check .env file has your key
 OPENAI_API_KEY=sk-your-actual-key-here
@@ -287,11 +300,13 @@ ls -la .env  # Should exist
 ```
 
 ### "Rate Limit Error"
+
 - You've hit OpenAI's rate limit
 - Wait a moment and try again
 - Or use a different API key
 
 ### Server Won't Start
+
 ```bash
 # Check if port 8000 is in use
 # Windows

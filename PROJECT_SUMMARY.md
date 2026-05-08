@@ -174,8 +174,9 @@ Code Input → Security Agent → Bug Detection → Refactoring → Quality Scor
 ## 📊 Evaluation Metrics
 
 The system tracks:
+
 - **Precision**: Accuracy of detected issues
-- **Recall**: Coverage of actual issues  
+- **Recall**: Coverage of actual issues
 - **F1-Score**: Harmonic mean
 - **Confusion Matrix**: TP, FP, TN, FN
 - **Hallucination Rate**: False positive tracking
@@ -183,6 +184,7 @@ The system tracks:
 ## 🚀 Usage Examples
 
 ### Python SDK
+
 ```python
 from src.agents.orchestrator import CodeReviewOrchestrator
 from src.core.config import Config
@@ -193,11 +195,13 @@ result = orchestrator.review_code(code, "python")
 ```
 
 ### CLI
+
 ```bash
 python -m src.cli analyze --file app.py
 ```
 
 ### REST API
+
 ```bash
 curl -X POST http://localhost:8000/api/v1/review/sync \
   -H "Content-Type: application/json" \
@@ -252,22 +256,25 @@ CodeReview-Agent/
 ✅ **Intelligent Refactoring Suggestions**  
 ✅ **Quality Scoring System**  
 ✅ **Comprehensive Documentation**  
-✅ **Working Examples**  
+✅ **Working Examples**
 
 ## 🔧 Setup & Installation
 
 1. **Install Dependencies**
+
    ```bash
    pip install -r requirements.txt
    ```
 
 2. **Configure Environment**
+
    ```bash
    cp .env.example .env
    # Add your OPENAI_API_KEY
    ```
 
 3. **Run Examples**
+
    ```bash
    python examples/basic_usage.py
    ```
@@ -297,6 +304,7 @@ CodeReview-Agent/
 ## 📝 Notes
 
 This project demonstrates:
+
 1. **Multi-agent LLM orchestration** with LangGraph
 2. **Integration of static analysis tools** with AI-powered analysis
 3. **Comprehensive evaluation framework** for measuring performance

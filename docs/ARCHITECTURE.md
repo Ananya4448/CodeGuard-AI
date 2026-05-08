@@ -55,12 +55,14 @@ CodeReview-Agent is a multi-agent LLM system designed to automate code review pr
 **Location**: `src/agents/orchestrator.py`
 
 **Responsibilities**:
+
 - Coordinates the multi-agent workflow using LangGraph
 - Manages agent execution order and dependencies
 - Aggregates results from all agents
 - Handles error recovery and fallback mechanisms
 
 **LangGraph Workflow**:
+
 ```python
 workflow = StateGraph(AgentState)
 
@@ -81,11 +83,13 @@ workflow.add_edge("quality", END)
 ### 2. Specialized Agents
 
 #### Security Agent
+
 **Location**: `src/agents/security_agent.py`
 
 **Purpose**: Detect security vulnerabilities and unsafe patterns
 
 **Capabilities**:
+
 - SQL injection detection
 - Cross-Site Scripting (XSS) vulnerabilities
 - Hardcoded credentials
@@ -94,16 +98,19 @@ workflow.add_edge("quality", END)
 - Cryptographic weaknesses
 
 **Implementation**:
+
 - Uses LLM for context-aware analysis
 - Pattern matching for known vulnerabilities
 - Integration with Bandit for Python security analysis
 
 #### Bug Detection Agent
+
 **Location**: `src/agents/bug_detector.py`
 
 **Purpose**: Identify logic errors and potential runtime bugs
 
 **Capabilities**:
+
 - Null pointer/None reference errors
 - Array index out of bounds
 - Off-by-one errors
@@ -112,16 +119,19 @@ workflow.add_edge("quality", END)
 - Incorrect exception handling
 
 **Implementation**:
+
 - LLM-powered semantic analysis
 - AST (Abstract Syntax Tree) analysis
 - Pattern-based detection
 
 #### Refactoring Agent
+
 **Location**: `src/agents/refactoring_agent.py`
 
 **Purpose**: Suggest code improvements and refactorings
 
 **Capabilities**:
+
 - Code smell detection
 - Design pattern recommendations
 - Complexity reduction suggestions
@@ -129,16 +139,19 @@ workflow.add_edge("quality", END)
 - SOLID principle violations
 
 **Implementation**:
+
 - LLM-generated refactoring suggestions
 - Provides before/after code examples
 - Prioritizes suggestions by impact
 
 #### Quality Scoring Agent
+
 **Location**: `src/agents/quality_agent.py`
 
 **Purpose**: Calculate comprehensive quality metrics
 
 **Capabilities**:
+
 - Overall quality score (0-100)
 - Maintainability index
 - Reliability score
@@ -147,6 +160,7 @@ workflow.add_edge("quality", END)
 - Complexity metrics
 
 **Implementation**:
+
 - Aggregates findings from all agents
 - Uses LLM for holistic quality assessment
 - Calculates technical debt estimates
@@ -156,12 +170,14 @@ workflow.add_edge("quality", END)
 **Location**: `src/analysis/`
 
 **Components**:
+
 - **StaticAnalyzer**: Integrates Pylint, Flake8, Bandit, MyPy
 - **RuleValidator**: Pattern-based rule engine
 - **AntiPatternDetector**: AST-based anti-pattern detection
 - **ComplexityAnalyzer**: Cyclomatic complexity, Halstead metrics
 
 **Integration**:
+
 ```python
 static_analyzer = StaticAnalyzer(config)
 issues = static_analyzer.analyze(code, language)
@@ -175,11 +191,13 @@ rule_issues = rule_validator.validate(code, language)
 **Location**: `src/evaluation/`
 
 **Components**:
+
 - **MetricsCalculator**: Calculates precision, recall, F1-score
 - **ConfusionMatrix**: Tracks TP, FP, TN, FN
 - **Benchmark**: Evaluation against ground truth datasets
 
 **Metrics**:
+
 ```python
 class ConfusionMatrix:
     - Precision = TP / (TP + FP)
@@ -195,12 +213,14 @@ class ConfusionMatrix:
 **Technology**: FastAPI + Uvicorn
 
 **Endpoints**:
+
 - `POST /api/v1/review/sync`: Synchronous review
 - `POST /api/v1/review`: Asynchronous review
 - `GET /api/v1/review/{id}`: Get review results
 - `GET /api/v1/metrics`: Aggregate metrics
 
 **Features**:
+
 - RESTful API design
 - Background task processing
 - CORS support
@@ -236,32 +256,39 @@ class AgentState:
 ## Design Patterns
 
 ### 1. Chain of Responsibility
+
 Agents process code sequentially, each adding their findings to shared state.
 
 ### 2. Strategy Pattern
+
 Different analysis strategies (LLM, static analysis, pattern matching) can be swapped.
 
 ### 3. Observer Pattern
+
 Evaluation framework observes agent outputs to calculate metrics.
 
 ### 4. Factory Pattern
+
 Configuration factory creates appropriate LLM instances based on provider.
 
 ## Scalability Considerations
 
 ### Horizontal Scaling
+
 - Stateless API design
 - Background task queue (Celery/RQ for production)
 - Result caching (Redis)
 - Database for persistent storage
 
 ### Performance Optimization
+
 - Parallel agent execution (future enhancement)
 - LLM response caching
 - Incremental analysis for large codebases
 - Timeout management
 
 ### Resource Management
+
 - Configurable concurrent review limits
 - Agent timeout settings
 - Memory-efficient code parsing
@@ -270,17 +297,20 @@ Configuration factory creates appropriate LLM instances based on provider.
 ## Security
 
 ### Input Validation
+
 - Code size limits
 - Language validation
 - Sanitization of file paths
 
 ### API Security
+
 - API key authentication (production)
 - Rate limiting
 - CORS configuration
 - Input sanitization
 
 ### LLM Security
+
 - API key management via environment variables
 - Request/response validation
 - Timeout protection
@@ -289,18 +319,21 @@ Configuration factory creates appropriate LLM instances based on provider.
 ## Extensibility
 
 ### Adding New Agents
+
 1. Create agent class inheriting base pattern
 2. Implement `analyze(state: AgentState) -> AgentState`
 3. Register in orchestrator workflow
 4. Update graph edges
 
 ### Adding New Languages
+
 1. Update `supported_languages` in config
 2. Add language-specific rules in RuleValidator
 3. Add static analysis tool integration
 4. Update detection patterns
 
 ### Custom Rules
+
 ```python
 validator.add_custom_rule(
     language="python",
@@ -317,11 +350,13 @@ validator.add_custom_rule(
 ## Deployment
 
 ### Development
+
 ```bash
 python -m src.api.server
 ```
 
 ### Production
+
 ```bash
 # Using Gunicorn
 gunicorn src.api.server:app -w 4 -k uvicorn.workers.UvicornWorker
@@ -332,22 +367,26 @@ docker run -p 8000:8000 codereview-agent
 ```
 
 ### Environment Variables
+
 See `.env.example` for all configuration options.
 
 ## Monitoring & Observability
 
 ### Logging
+
 - Structured logging with Loguru
 - Log levels: DEBUG, INFO, WARNING, ERROR
 - Log rotation and compression
 
 ### Metrics
+
 - Review count and success rate
 - Average execution time
 - Issue detection rates
 - Quality score distribution
 
 ### Tracing
+
 - LangSmith integration for LLM call tracing
 - Request/response logging
 - Performance profiling
